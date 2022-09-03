@@ -1,0 +1,9 @@
+# server dependencies
+
+/node_modules
+.env
+
+# client dependencies
+
+/client/node_modules
+/client/.env

@@ -1,0 +1,22 @@
+{
+  "name": "socket-io",
+  "version": "1.0.0",
+  "description": "Messaging App with React, Express, and Socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "author": "Earl Joseph C. Fernando",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "node-localstorage": "^2.2.1",
+    "nodemon": "^2.0.19",
+    "react": "^18.2.0",
+    "socket-io": "^1.0.0",
+    "socket.io": "^4.5.1"
+  }
+}
