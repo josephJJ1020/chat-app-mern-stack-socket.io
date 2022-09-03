@@ -1,13 +1,58 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none;
+}
+
+.container {
+  min-height: 100vh;
+  padding: 0 10vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: linear-gradient(to right, #005AA7, #FFFDE4);
+}
+
+/* main page */
+.header {
+  margin: 20px;
+}
+
+/* chat */
+.chat {
+  width: 500px;
+  background: whitesmoke;
+  filter: drop-shadow(1px 1px 10px gray);
 }
 
 .messages {
-  float: left;
-  width: 300px;
   height: 60vh;
   display: block;
-  background: whitesmoke;
-  filter: drop-shadow(1px 1px 10px gray);
   overflow-y: auto;
+  padding: 20px;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.chatbox {
+  width: 100%;
+  display: flex;
+}
+
+.chatbox input {
+  width: 80%;
+}
+
+.chat button {
+  flex-grow: 1;
+}
+
+.chatbox input, .chatbox button {
+  padding: 12px;
 }

@@ -1,6 +1,12 @@
 const { LocalStorage } = require("node-localstorage");
 const db = new LocalStorage("data"); // use data folder as our 'database'
 
+/*
+
+STORES: message objects {author: str, message: str}
+
+*/
+
 class Database {
   constructor() {}
 
