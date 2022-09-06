@@ -4,8 +4,16 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: linear-gradient(to right, #005aa7, #fffde4);
+}
+
 *:focus {
   outline: none;
+}
+
+h1 {
+  font-size: 5rem;
 }
 
 .container {
@@ -14,12 +22,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: linear-gradient(to right, #005AA7, #FFFDE4);
+  background-size: 200%;
+  background-position: bottom left;
+  background-repeat: no-repeat;
+  animation: slide-gradient 10s alternate infinite ease-in-out;
 }
 
 /* main page */
-.header {
+header {
   margin: 20px;
+  text-align: center;
 }
 
 /* chat */
@@ -46,13 +58,26 @@
 }
 
 .chatbox input {
-  width: 80%;
+  
+  font-family: "Raleway", sans-serif;
 }
 
 .chat button {
   flex-grow: 1;
 }
 
-.chatbox input, .chatbox button {
-  padding: 12px;
+.chatbox input,
+.chatbox button {
+  border-radius: 0%;
+}
+
+.chatbox input:focus {
+  filter: none;
+}
+
+/* animations */
+@keyframes slide-gradient {
+  to {
+    background-position: top right;
+  }
 }
