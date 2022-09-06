@@ -25,17 +25,18 @@ function App() {
   // get all messages from db when starting the app
   useEffect(() => {
     // random ID; if there is already an ID in session, use it, else generate new one
-    if (sessionStorage.getItem('Id')) {
-      setUsername(sessionStorage.getItem('Id'))
+    if (sessionStorage.getItem("Id")) {
+      setUsername(sessionStorage.getItem("Id"));
     } else {
-      const Id = uuidv4().slice(0,8)
-      setUsername(Id)
-      sessionStorage.setItem('Id', Id)
+      const Id = uuidv4().slice(0, 8);
+      setUsername(Id);
+      sessionStorage.setItem("Id", Id);
     }
 
     socket.on("connect", () => {
       // set connected = true when socket connects to server
       setConnected(true);
+      // socket.emit('newConnect', `Anon${username}`)
     });
 
     socket.on("getMessages", (msgs) => {
@@ -61,6 +62,11 @@ function App() {
     socket.on("newMsg", (newMsg) => {
       setMessages([...messages, newMsg]);
     });
+
+    socket.on('newConnectServer', (newMsg) => {
+      setMessages([...messages, newMsg])
+      console.log(messages)
+    })
   }, [socket, messages]);
 
   // update message to be sent
@@ -71,16 +77,20 @@ function App() {
   // send message with socket.emit(), clear msg state
   const sendMsg = (event) => {
     event.preventDefault();
-    socket.emit("msg", { author: `Anon${username}`, message: msg });
-    setMsg("");
+    if (msg.length) {
+      socket.emit("msg", { author: `Anon${username}`, message: msg });
+      setMsg("");
+    }
   };
 
   return (
     <div className="App">
       <div className="container">
-        <h1 className="header">
-          This is the client for the socket-io Chat App!
-        </h1>
+        <header>
+          <h1>Anon Chat</h1>
+          <h2>Chat with people anonymously!</h2>
+        </header>
+
         {connected ? (
           <div className="chat">
             <div className="messages">
@@ -90,20 +100,21 @@ function App() {
                 messages.map((message, index) => {
                   return (
                     <div className="message" key={index}>
-                      <b>{message.author}</b>: {message.message}
+                      <b>{message.author === 'server' ? null : `${message.author}:`}</b> {message.message}
                     </div>
                   );
                 })
               )}
             </div>
-            <form className="chatbox" onSubmit={(e) => sendMsg(e)} >
+            <form className="chatbox" onSubmit={(e) => sendMsg(e)}>
               <input
                 type="text"
                 value={msg}
                 placeholder="Type here!"
+                className="form-control shadow-none"
                 onChange={(e) => updateMsg(e.target.value)}
               />
-              <button type="submit">Submit</button>
+              <button type="submit" className="btn btn-primary">Submit</button>
             </form>
           </div>
         ) : (
