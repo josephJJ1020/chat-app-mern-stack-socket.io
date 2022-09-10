@@ -7,3 +7,6 @@
 
 /client/node_modules
 /client/.env
+
+# old MongoDB service
+/services

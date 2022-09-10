@@ -1,5 +1,4 @@
 const { MongoClient } = require("mongodb");
-
 class MessageDB {
   constructor(url) {
     this.url = url;
@@ -25,7 +24,7 @@ class MessageDB {
   }
 
   async disconnect() {
-    return await this.client.close()
+    return await this.client.close();
   }
 }
 

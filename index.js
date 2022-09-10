@@ -1,10 +1,13 @@
 const express = require("express");
-const app = express(); // instantiate express app"mongodb://localhost:27017"
-const MessageDB = require("./services/msgStorage"); // message storage service that uses MongoDB Client
+const app = express(); // instantiate express app
+const mongoose = require("mongoose"); // use mongoose instead of MongoDB directly
+const controller = require("./controller/controller"); // message storage service that uses mongoose as ORM
 
-require("dotenv").config();
+require("dotenv").config(); // use for accessing environment variables
 
-const msgDB = new MessageDB(process.env.MONGODB_URI); // instantiate message storage service
+// mongoose connection; connect mongoose to MongoDB database
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGOOSE_URI);
 
 const http = require("http");
 const server = http.createServer(app); // create HTTP server with Express listener
@@ -22,25 +25,26 @@ app.use(cors()); // use cors for backend-frontend communication
 
 io.on("connection", async (socket) => {
   // send all messages to newly connected client
-  await msgDB.connect(); // connect to database
 
-  const messages = await msgDB.getMessages().toArray(); // retrieve all messages from database
+  const messages = await controller.getMessages(); // get messages from mongoose
   io.to(socket.id).emit("getMessages", messages);
 
   socket.on("msg", async (content) => {
-    // when client sends a message
-    await msgDB.storeMessage(content); // store message in database
-    io.sockets.emit("newMsg", content); // emit new message to all connected sockets
+    // // when client sends a message
+
+    controller.addMessage(content); // add message to MongoDB with mongoose
+    io.sockets.emit("newMsg", content); // emit new message to all clients
   });
 
-  socket.on("disconnect", async () => {
-    // when client disconnects
-    try {
-      await msgDB.disconnect();
-    } catch (err) {
-      console.error(err);
-    }
-  });
+  socket.on("disconnect", async () => {});
 });
 
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+app.get('/xd', (req, res) => {
+  res.send('xd')
+} )
+
+app.use((req, res, next) => {
+  res.send('Page not found')
+})
+
+server.listen(PORT, process.env.SERVER_HOSTNAME ,() => console.log(`Listening on port ${PORT}`));
