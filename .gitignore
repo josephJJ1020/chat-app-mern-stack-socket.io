@@ -1,7 +1,7 @@
 # server dependencies
 
 /node_modules
-# *.env
+*.env
 
 # client dependencies
 

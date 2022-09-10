@@ -19,8 +19,6 @@ const io = new Server(server, {
 
 const cors = require("cors"); // use cors for backend-frontend communication
 
-const PORT = parseInt(process.env.SERVER_PORT) || 3000; // get port number from .env
-
 app.use(cors()); // use cors for backend-frontend communication
 
 io.on("connection", async (socket) => {
@@ -47,4 +45,4 @@ app.use((req, res, next) => {
   res.send("Page not found");
 });
 
-server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+server.listen(process.env.PORT || 4000, () => console.log(`Listening on port ${PORT}`));
