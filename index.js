@@ -39,12 +39,12 @@ io.on("connection", async (socket) => {
   socket.on("disconnect", async () => {});
 });
 
-app.get('/xd', (req, res) => {
-  res.send('xd')
-} )
+app.get("/xd", (req, res) => {
+  res.send("xd");
+});
 
 app.use((req, res, next) => {
-  res.send('Page not found')
-})
+  res.send("Page not found");
+});
 
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`));
