@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-# Anon Chat - Real-time Chat App with MongoDB, Mongoose, Express, React, Node.js, and Socket.io
-=======
 # Anon Chat
-## Real-time Chat App with MongoDB, Express, React, Node.js, and Socket.io
->>>>>>> 4ec604d662c24011a207ba32cdfc6d4026e21f23
+## Real-time Chat App with MongoDB, Mongoose, Express, React, Node.js, and Socket.io
+
+=======
 
 Chat with people anonymously in one single group chat. This is a simple blueprint for creating a real-time chat application with the MERN stack.
 
