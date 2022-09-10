@@ -1,12 +1,10 @@
 # server dependencies
 
 /node_modules
-*.env
+# *.env
 
 # client dependencies
 
-/client/node_modules
-/client/.env
 
 # old MongoDB service
 /services
