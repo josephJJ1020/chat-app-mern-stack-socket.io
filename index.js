@@ -19,7 +19,7 @@ const io = new Server(server, {
 
 const cors = require("cors"); // use cors for backend-frontend communication
 
-const PORT = parseInt(process.env.SERVER_PORT); // get port number from .env
+const PORT = parseInt(process.env.SERVER_PORT) || 3000; // get port number from .env
 
 app.use(cors()); // use cors for backend-frontend communication
 
